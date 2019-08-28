@@ -2,31 +2,22 @@ namespace: Integrations.demo.aos.Users
 flow:
   name: create_user
   inputs:
-    - file_host
-    - file_user
+    - file_host: itom1.hcm.demo.local
+    - file_user: root
     - file_password:
+        default: S0lutions2016
         sensitive: true
     - credentials
-    - db_host
+    - db_host: AOS VM
+    - db_user: postgres
     - db_password:
+        default: admin
         sensitive: true
-    - db_user
-    - mm_url
-    - mm_user
+    - mm_url: 'https://mattermost.hcm.demo.local'
+    - mm_user: admin
     - mm_password:
+        default: Cloud_123
         sensitive: true
-    - mm_channel_id
-  workflow:
-    - ssh_command:
-        do:
-          io.cloudslang.base.ssh.ssh_command: []
-        navigate:
-          - FAILURE: on_failure
-  results:
-    - FAILURE
-extensions:
-  graph:
-    steps:
-      ssh_command:
-        x: 339
-        'y': 214
+    - mm_channel_id: eeujbpz9ufbc8rxcyj9qhcgq3a
+ 
+  results: []
