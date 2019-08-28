@@ -13,8 +13,7 @@ flow:
         sensitive: true
     - mm_url
     - mm_user
-    - mm_password
+    - mm_password:
         sensitive: true
     - mm_channel_id 
   results: []
-  
