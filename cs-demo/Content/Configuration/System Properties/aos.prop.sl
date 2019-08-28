@@ -2,7 +2,7 @@ namespace: ''
 properties:
   - script_location: /tmp
   - vcenter_host: 10.0.46.10
-  - vcenter_user: "CAPA1\\\\1010-capa1user"
+  - vcenter_user: "CAPA1\\\\1023-capa1user"
   - vcenter_password:
       value: Automation123
       sensitive: false
