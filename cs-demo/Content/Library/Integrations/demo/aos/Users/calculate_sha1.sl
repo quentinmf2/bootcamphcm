@@ -17,14 +17,25 @@ flow:
         publish:
           - sha1: '${return_result.strip()}'
         navigate:
+          - SUCCESS: SUCCESS
           - FAILURE: on_failure
   outputs:
     - sha1: '${sha1}'
   results:
     - FAILURE
+    - SUCCESS
 extensions:
   graph:
     steps:
       ssh_command:
-        x: 319
-        'y': 222
+        x: 370
+        'y': 152
+        navigate:
+          7dbe8b8a-6f52-bf8d-80a1-62348a47b262:
+            targetId: c1f693d7-df0d-1398-786e-6b1c1bb006f4
+            port: SUCCESS
+    results:
+      SUCCESS:
+        c1f693d7-df0d-1398-786e-6b1c1bb006f4:
+          x: 478
+          'y': 158
