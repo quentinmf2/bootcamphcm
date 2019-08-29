@@ -1,6 +1,6 @@
 namespace: Integrations.demo.aos.Users
 flow:
-  name: create_users
+  name: create_users_1
   inputs:
     - file_host: itom1.hcm.demo.local
     - file_user: root
@@ -32,19 +32,8 @@ flow:
         publish:
           - file_content: '${return_result}'
         navigate:
-          - SUCCESS: create_user
-          - FAILURE: on_failure
-    - create_user:
-        loop:
-          for: credentials in file_content.split()
-          do:
-            Integrations.demo.aos.Users.create_user:
-              - credentials: '${credentials}'
-          break:
-            - FAILURE
-        navigate:
-          - FAILURE: on_failure
           - SUCCESS: SUCCESS
+          - FAILURE: on_failure
   results:
     - SUCCESS
     - FAILURE
@@ -52,13 +41,10 @@ extensions:
   graph:
     steps:
       read_users:
-        x: 369
-        'y': 75
-      create_user:
-        x: 309
-        'y': 226
+        x: 411
+        'y': 132
         navigate:
-          9af4e04d-e611-ea9d-93ed-03604ec7f654:
+          bbb03122-a53e-70df-c2b5-42da49efae50:
             targetId: 69a34338-ce36-ff96-677f-8105308cf224
             port: SUCCESS
     results:

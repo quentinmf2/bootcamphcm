@@ -2,11 +2,12 @@ namespace: Integrations.demo.aos.Users
 flow:
   name: calculate_sha1
   inputs:
-    - host
-    - user
+    - host: itom1.hcm.demo.local
+    - user: root
     - password:
+        default: S0lutions2016
         sensitive: true
-    - text
+    - text: cloud
   workflow:
     - ssh_command:
         do:
@@ -14,6 +15,9 @@ flow:
             - host: '${host}'
             - command: "${\"echo -n '\"+text+\"' | sha1sum | awk '{print $1}'\"}"
             - username: '${user}'
+            - password:
+                value: '${password}'
+                sensitive: true
         publish:
           - sha1: '${return_result.strip()}'
         navigate:

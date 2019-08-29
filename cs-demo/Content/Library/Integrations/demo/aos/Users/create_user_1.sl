@@ -1,6 +1,6 @@
 namespace: Integrations.demo.aos.Users
 flow:
-  name: create_user
+  name: create_user_1
   inputs:
     - file_host: itom1.hcm.demo.local
     - file_user: root
@@ -71,7 +71,7 @@ flow:
     - sql_command:
         do:
           io.cloudslang.base.database.sql_command:
-            - db_server_name: 10.0.46.74
+            - db_server_name: '${db_host}'
             - db_type: PostgreSQL
             - username: '${db_user}'
             - password:
@@ -81,21 +81,8 @@ flow:
             - command: "${\"INSERT INTO account (user_id, user_type, active, agree_to_receive_offers, defaultpaymentmethodid, email, internallastsuccesssullogin, internalunsuccessfulloginattempts, internaluserblockedfromloginuntil, login_name, password, country_id) VALUES (\"+user_id+\", 20, 'Y', true, 0, 'someone@microfocus.com', 0, 0, 0, '\"+created_name+\"', '\"+username_password_sha1+\"', 210);\"}"
             - trust_all_roots: 'true'
         navigate:
-          - SUCCESS: Send_Message
+          - SUCCESS: SUCCESS
           - FAILURE: on_failure
-    - Send_Message:
-        do_external:
-          a1e51a2b-19e2-4444-9ad3-431430b39bfc:
-            - url: '${mm_url}'
-            - username: '${mm_user}'
-            - password:
-                value: '${mm_password}'
-                sensitive: true
-            - channel_id: '${mm_channel_id}'
-            - message: "${'User '+created_name+' added to AOS at '+db_host}"
-        navigate:
-          - success: SUCCESS
-          - failure: on_failure
   results:
     - FAILURE
     - SUCCESS
@@ -117,13 +104,10 @@ extensions:
       sql_command:
         x: 683
         'y': 184
-      Send_Message:
-        x: 659
-        'y': 319
         navigate:
-          aa36e778-a5e6-f7b8-e866-b60a980211e0:
+          bcd18f35-a1d1-fa55-fc85-32e8937fec05:
             targetId: 67b253b7-ed9d-f6c1-3426-903ac8fd2170
-            port: success
+            port: SUCCESS
     results:
       SUCCESS:
         67b253b7-ed9d-f6c1-3426-903ac8fd2170:
